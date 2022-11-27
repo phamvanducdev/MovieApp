@@ -1,0 +1,14 @@
+signingConfigs {
+  debug {
+    storeFile file('keys/debug.jks')
+    storePassword 'Duc@260602'
+    keyAlias 'MovieApp'
+    keyPassword 'Duc@260602'
+  }
+  release {
+    storeFile file('keys/release.jks')
+    storePassword 'Duc@260602'
+    keyAlias 'MovieApp'
+    keyPassword 'Duc@260602'
+  }
+}
