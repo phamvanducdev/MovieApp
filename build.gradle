@@ -22,12 +22,6 @@ buildscript {
     swipe_refresh = '1.1.0'
     camerax = '1.2.0-beta02'
 
-    // Compose
-    compose_bom = '2022.10.00'
-    compose_material2 = '1.4.0-alpha02'
-    compose_coil = '2.2.2'
-    compose_accompanist = '0.27.0'
-
     // Libraries
     gson = '2.9.1'
     okhttp3 = '4.10.0'

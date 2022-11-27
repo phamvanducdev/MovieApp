@@ -88,27 +88,6 @@ dependencies {
   implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle"
   implementation "androidx.savedstate:savedstate-ktx:$savedstate_ktx"
 
-  // Compose
-  implementation "androidx.compose.material:material:$compose_material2"
-  implementation "androidx.compose.ui:ui:$compose_material2"
-  implementation "androidx.compose.ui:ui-tooling:$compose_material2"
-  implementation "androidx.compose.ui:ui-tooling-preview:$compose_material2"
-  implementation "androidx.compose.runtime:runtime:$compose_material2"
-  implementation "androidx.compose.runtime:runtime-livedata:$compose_material2"
-
-  implementation "androidx.activity:activity-compose:$activity"
-
-  implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycle"
-  implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycle"
-
-  implementation "androidx.navigation:navigation-compose:$navigation"
-  implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation"
-
-  implementation "io.coil-kt:coil-compose:$compose_coil"
-
-  implementation "com.google.accompanist:accompanist-pager:$compose_accompanist"
-  implementation "com.google.accompanist:accompanist-pager-indicators:$compose_accompanist"
-
   // Navigation
   implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
   implementation "androidx.navigation:navigation-ui-ktx:$navigation"
@@ -147,13 +126,6 @@ dependencies {
 
   // Eventbus
   implementation "org.greenrobot:eventbus:$eventbus"
-
-  // PhotoView
-  implementation "com.github.chrisbanes:PhotoView:$photo_view"
-
-  // MLKit
-  implementation "com.google.mlkit:camera:$ml_camera"
-  implementation "com.google.mlkit:face-detection:$ml_face_detection"
 
   // Testing
   testImplementation "com.google.truth:truth:$truth"
