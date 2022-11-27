@@ -1,8 +1,9 @@
-package com.ducpv.movie
+package com.ducpv.movie.ui
 
 import androidx.activity.viewModels
 import com.ducpv.movie.base.BaseActivity
 import com.ducpv.movie.databinding.ActivityMainBinding
+import com.ducpv.movie.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

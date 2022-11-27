@@ -1,6 +1,7 @@
-package com.ducpv.movie
+package com.ducpv.movie.ui.main
 
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ducpv.movie.base.BaseFragment
 import com.ducpv.movie.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,5 +15,12 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
 
     override fun getViewBinding(): FragmentMainBinding {
         return FragmentMainBinding.inflate(layoutInflater)
+    }
+
+    override fun viewBinding() {
+        super.viewBinding()
+        binding.root.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment())
+        }
     }
 }

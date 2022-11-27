@@ -7,14 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_white"
-        tools:context="com.ducpv.movie.ui.splash.SplashFragment">
+        tools:context="com.ducpv.movie.ui.detail.DetailFragment">
 
         <TextView
-            android:id="@+id/tv_loading"
+            android:id="@+id/tv_id"
             style="@style/TextAppearance.LabelLargeNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loading"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
