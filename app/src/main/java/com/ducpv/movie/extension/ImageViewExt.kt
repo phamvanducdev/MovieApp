@@ -12,8 +12,8 @@ fun ImageView.loadImage(file: File?) {
     Glide
         .with(this)
         .load(file)
-        .error(R.color.object_warning)
-        .placeholder(R.color.object_light_gray)
+        .error(R.color.gray)
+        .placeholder(R.color.gray)
         .transform()
         .into(this)
 }
@@ -22,8 +22,8 @@ fun ImageView.loadImage(url: String?) {
     Glide
         .with(this)
         .load(url)
-        .error(R.color.object_warning)
-        .placeholder(R.color.object_light_gray)
+        .error(R.color.gray)
+        .placeholder(R.color.gray)
         .transform()
         .into(this)
 }
