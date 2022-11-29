@@ -18,7 +18,7 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
 
     fun initApp() {
         onLaunchCoroutine {
-            delay(3_000L)
+            delay(1_000L)
             _uiState.value = SplashUiState.Finish
         }
     }

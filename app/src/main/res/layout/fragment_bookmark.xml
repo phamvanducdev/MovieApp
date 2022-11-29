@@ -7,14 +7,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="com.ducpv.movie.ui.splash.SplashFragment">
+        tools:context="com.ducpv.movie.ui.bookmark.BookmarkFragment">
 
         <TextView
-            android:id="@+id/text_view"
             style="@style/TextAppearance.LabelMediumNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loading"
+            android:text="@string/bookmark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

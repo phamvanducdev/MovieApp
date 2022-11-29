@@ -26,7 +26,7 @@ class SplashFragment : BaseFragment<SplashViewModel, FragmentSplashBinding>() {
     override fun observeViewModel() {
         super.observeViewModel()
         viewModel.uiState.observe(viewLifecycleOwner) {
-            binding.tvLoading.isVisible = it is SplashUiState.Loading
+            binding.textView.isVisible = it is SplashUiState.Loading
             if (it is SplashUiState.Finish) {
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToMainFragment())
             }
