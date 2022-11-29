@@ -1,4 +1,4 @@
-package com.ducpv.movie
+package com.ducpv.movie.ui.main
 
 import com.ducpv.movie.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
