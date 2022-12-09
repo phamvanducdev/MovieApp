@@ -1,7 +1,10 @@
 package com.ducpv.movie.ui.bookmark
 
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
-import com.ducpv.movie.base.BaseFragment
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
+import com.ducpv.movie.shared.base.BaseFragment
 import com.ducpv.movie.databinding.FragmentBookmarkBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,5 +23,15 @@ class BookmarkFragment : BaseFragment<BookmarkViewModel, FragmentBookmarkBinding
 
     override fun getViewBinding(): FragmentBookmarkBinding {
         return FragmentBookmarkBinding.inflate(layoutInflater)
+    }
+
+    override fun events() {
+        super.events()
+        binding.root.setOnClickListener {
+            val request = NavDeepLinkRequest.Builder
+                .fromUri("movie://detail/724495".toUri())
+                .build()
+            findNavController().navigate(request)
+        }
     }
 }

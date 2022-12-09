@@ -1,13 +1,14 @@
 package com.ducpv.movie.di
 
 import com.ducpv.movie.BuildConfig
-import com.ducpv.movie.service.Service
+import com.ducpv.movie.domain.service.Service
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,19 +21,36 @@ import retrofit2.converter.gson.GsonConverterFactory
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
 
-    @Provides
     @Singleton
+    @Provides
     fun provideOkHttpClient(): OkHttpClient {
         val okHttpClient = OkHttpClient.Builder()
-        okHttpClient.addInterceptor(
-            HttpLoggingInterceptor().apply {
-                level = if (BuildConfig.DEBUG) {
-                    HttpLoggingInterceptor.Level.BODY
+            .addInterceptor(
+                if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor()
+                        .setLevel(HttpLoggingInterceptor.Level.HEADERS)
+                        .setLevel(HttpLoggingInterceptor.Level.BODY)
                 } else {
-                    HttpLoggingInterceptor.Level.NONE
+                    HttpLoggingInterceptor()
+                        .setLevel(HttpLoggingInterceptor.Level.NONE)
                 }
-            }
-        )
+            )
+            .addInterceptor(
+                Interceptor { chain ->
+                    val originalRequest = chain.request()
+                    val originalUrl = originalRequest.url
+                    val requestUrl = originalUrl
+                        .newBuilder()
+                        .addQueryParameter("api_key", BuildConfig.API_KEY)
+                        .build()
+                    val requestBuilder = originalRequest
+                        .newBuilder()
+                        .url(requestUrl)
+                    val request = requestBuilder.build()
+                    chain.proceed(request)
+                }
+            )
+
         return okHttpClient
             .connectTimeout(30L, TimeUnit.SECONDS)
             .readTimeout(30L, TimeUnit.SECONDS)
@@ -40,8 +58,8 @@ object ServiceModule {
             .build()
     }
 
-    @Provides
     @Singleton
+    @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.API_URL)
@@ -49,7 +67,7 @@ object ServiceModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    @Provides
     @Singleton
+    @Provides
     fun provideService(retrofit: Retrofit): Service = retrofit.create(Service::class.java)
 }
