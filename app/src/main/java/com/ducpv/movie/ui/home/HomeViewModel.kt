@@ -1,10 +1,10 @@
 package com.ducpv.movie.ui.home
 
 import androidx.lifecycle.asLiveData
-import com.ducpv.movie.base.BaseViewModel
-import com.ducpv.movie.model.Movie
-import com.ducpv.movie.usecase.GetMoviesNowPlayingUseCase
-import com.ducpv.movie.usecase.GetMoviesPopularUseCase
+import com.ducpv.movie.shared.base.BaseViewModel
+import com.ducpv.movie.domain.model.Movie
+import com.ducpv.movie.domain.usecase.GetMoviesNowPlayingUseCase
+import com.ducpv.movie.domain.usecase.GetMoviesPopularUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,8 +25,8 @@ class HomeViewModel @Inject constructor(
     init {
         onLaunchCoroutine {
             try {
-                val moviesNowShowing = getMoviesNowPlayingUseCase.execute()
-                val moviesPopular = getMoviesPopularUseCase.execute()
+                val moviesNowShowing = getMoviesNowPlayingUseCase(Unit)
+                val moviesPopular = getMoviesPopularUseCase(Unit)
                 _uiState.update {
                     it.copy(
                         isLoading = false,

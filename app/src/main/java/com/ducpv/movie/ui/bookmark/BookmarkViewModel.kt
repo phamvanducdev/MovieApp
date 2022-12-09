@@ -1,6 +1,6 @@
 package com.ducpv.movie.ui.bookmark
 
-import com.ducpv.movie.base.BaseViewModel
+import com.ducpv.movie.shared.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

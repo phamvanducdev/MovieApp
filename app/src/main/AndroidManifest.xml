@@ -15,12 +15,24 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.LauncherActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.onboarding.OnboardingActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+
+            <!-- Added to handle deep links -->
+            <nav-graph android:value="@navigation/nav_graph" />
         </activity>
 
     </application>

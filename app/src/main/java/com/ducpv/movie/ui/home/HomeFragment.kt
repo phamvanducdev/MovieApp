@@ -1,8 +1,10 @@
 package com.ducpv.movie.ui.home
 
 import androidx.fragment.app.viewModels
-import com.ducpv.movie.base.BaseFragment
 import com.ducpv.movie.databinding.FragmentHomeBinding
+import com.ducpv.movie.shared.base.BaseFragment
+import com.ducpv.movie.shared.extension.singleObserve
+import com.ducpv.movie.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -19,8 +21,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private val adapter: HomeAdapter by lazy {
         HomeAdapter(
             onItemMovieClickListener = {
-                // TODO
-            }
+                navigateTo(MainFragmentDirections.actionMainFragmentToDetailFragment(it.id))
+            },
+            onViewMoreNowShowingClickListener = {},
+            onViewMorePopularClickListener = {}
         )
     }
 
@@ -37,7 +41,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
 
     override fun observeViewModel() {
         super.observeViewModel()
-        viewModel.uiState.observe(viewLifecycleOwner) {
+        singleObserve(viewModel.uiState) {
             adapter.submitList(it.uiItems)
         }
     }

@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ducpv.movie.databinding.ItemMovieNowShowingBinding
-import com.ducpv.movie.extension.loadImage
-import com.ducpv.movie.model.Movie
+import com.ducpv.movie.shared.extension.loadImage
+import com.ducpv.movie.domain.model.Movie
+import com.ducpv.movie.domain.service.Api
 
 /**
  * Created by pvduc9773 on 29/11/2022.
@@ -45,7 +46,7 @@ class NowShowingsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.tvTitle.text = movie.title
-            binding.ivPoster.loadImage(movie.poster)
+            binding.ivPoster.loadImage(Api.getPosterPath(movie.posterPath))
 
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)

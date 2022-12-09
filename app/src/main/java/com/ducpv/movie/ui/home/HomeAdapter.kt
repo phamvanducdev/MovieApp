@@ -9,16 +9,19 @@ import com.ducpv.movie.databinding.ItemHomeHeaderPopularBinding
 import com.ducpv.movie.databinding.ItemHomeLoadingBinding
 import com.ducpv.movie.databinding.ItemHomeNowShowingsBinding
 import com.ducpv.movie.databinding.ItemMoviePopularBinding
-import com.ducpv.movie.extension.dp
-import com.ducpv.movie.extension.loadImage
-import com.ducpv.movie.model.Movie
-import com.ducpv.movie.utils.SpacingItemDecoration
+import com.ducpv.movie.domain.model.Movie
+import com.ducpv.movie.domain.service.Api
+import com.ducpv.movie.shared.extension.dp
+import com.ducpv.movie.shared.extension.loadImage
+import com.ducpv.movie.shared.widget.SpacingItemDecoration
 
 /**
  * Created by pvduc9773 on 29/11/2022.
  */
 class HomeAdapter(
-    private val onItemMovieClickListener: (Movie) -> Unit
+    private val onItemMovieClickListener: (Movie) -> Unit,
+    private val onViewMoreNowShowingClickListener: () -> Unit,
+    private val onViewMorePopularClickListener: () -> Unit,
 ) : ListAdapter<ItemHomeUi, RecyclerView.ViewHolder>(HomeDiffCallBack) {
     object HomeDiffCallBack : DiffUtil.ItemCallback<ItemHomeUi>() {
         override fun areItemsTheSame(oldItem: ItemHomeUi, newItem: ItemHomeUi): Boolean {
@@ -35,12 +38,14 @@ class HomeAdapter(
             ItemHomeUiType.NOW_SHOWINGS.type -> {
                 ItemHomeNowShowingsVH(
                     ItemHomeNowShowingsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                    onItemMovieClickListener
+                    onItemMovieClickListener,
+                    onViewMoreNowShowingClickListener
                 )
             }
             ItemHomeUiType.HEADER_POPULARS.type -> {
                 ItemHomeHeaderPopularVH(
-                    ItemHomeHeaderPopularBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                    ItemHomeHeaderPopularBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                    onViewMorePopularClickListener
                 )
             }
             ItemHomeUiType.MOVIE_POPULAR.type -> {
@@ -79,12 +84,20 @@ class HomeAdapter(
     ) : RecyclerView.ViewHolder(binding.root)
 
     class ItemHomeHeaderPopularVH(
-        private val binding: ItemHomeHeaderPopularBinding
-    ) : RecyclerView.ViewHolder(binding.root)
+        private val binding: ItemHomeHeaderPopularBinding,
+        private val onViewMorePopularClickListener: () -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.tvSeeMore.setOnClickListener {
+                onViewMorePopularClickListener.invoke()
+            }
+        }
+    }
 
     class ItemHomeNowShowingsVH(
         private val binding: ItemHomeNowShowingsBinding,
-        private val onItemMovieClickListener: (Movie) -> Unit
+        private val onItemMovieClickListener: (Movie) -> Unit,
+        private val onViewMorePopularClickListener: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         private val nowShowingsAdapter: NowShowingsAdapter by lazy {
             NowShowingsAdapter(onItemMovieClickListener)
@@ -93,6 +106,9 @@ class HomeAdapter(
         init {
             binding.rvMovies.adapter = nowShowingsAdapter
             binding.rvMovies.addItemDecoration(SpacingItemDecoration(8.dp))
+            binding.tvSeeMore.setOnClickListener {
+                onViewMorePopularClickListener.invoke()
+            }
         }
 
         fun bind(movies: List<Movie>) {
@@ -108,7 +124,7 @@ class HomeAdapter(
             binding.tvTitle.text = movie.title
             binding.tvVoting.text = String.format("%s/10 IMDb", movie.voteAverage)
             binding.tvOverview.text = movie.overview
-            binding.ivPoster.loadImage(movie.poster)
+            binding.ivPoster.loadImage(Api.getPosterPath(movie.posterPath))
 
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)

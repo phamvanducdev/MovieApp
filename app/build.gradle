@@ -115,6 +115,9 @@ dependencies {
   // DataStore
   implementation "androidx.datastore:datastore-preferences:$datastore_preferences"
 
+  // Room
+  implementation "androidx.room:room-ktx:$room"
+
   // Timber
   implementation "com.jakewharton.timber:timber:$timber"
 
