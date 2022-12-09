@@ -1,10 +1,12 @@
 package com.ducpv.movie.ui.main
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.ducpv.movie.R
-import com.ducpv.movie.base.BaseFragment
+import com.ducpv.movie.shared.base.BaseFragment
 import com.ducpv.movie.databinding.FragmentMainBinding
+import com.ducpv.movie.ui.MainViewModel
 import com.ducpv.movie.ui.bookmark.BookmarkFragment
 import com.ducpv.movie.ui.home.HomeFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,25 +27,25 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
         return FragmentMainBinding.inflate(layoutInflater)
     }
 
-    override fun initialize() {
-        super.initialize()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         manuallyChangeTab(R.id.tab_home)
     }
 
     override fun viewBinding() {
         super.viewBinding()
-        binding.bottomNavigationView.itemIconTintList = null
+        binding.bottomNavigation.itemIconTintList = null
     }
 
     override fun events() {
         super.events()
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             return@setOnItemSelectedListener onCheckFragmentContains(item.itemId)
         }
     }
 
     private fun manuallyChangeTab(menu: Int) {
-        binding.bottomNavigationView.menu.findItem(menu).isChecked = true
+        binding.bottomNavigation.menu.findItem(menu).isChecked = true
         onCheckFragmentContains(menu)
     }
 
@@ -73,7 +75,7 @@ class MainFragment : BaseFragment<MainViewModel, FragmentMainBinding>() {
             }
             else -> {
                 childFragmentManager.beginTransaction().apply {
-                    add(R.id.fragmentContainerView, fragment, fragment.javaClass.simpleName)
+                    add(R.id.fragment_container, fragment, fragment.javaClass.simpleName)
                     activeFragment?.let { hide(it) }
                     commit()
                 }
