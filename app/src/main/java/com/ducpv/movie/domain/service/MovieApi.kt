@@ -3,7 +3,7 @@ package com.ducpv.movie.domain.service
 /**
  * Created by pvduc9773 on 01/12/2022.
  */
-object Api {
+object MovieApi {
     private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"
     private const val BASE_BACKDROP_PATH = "https://image.tmdb.org/t/p/w780"
     private const val YOUTUBE_VIDEO_URL = "https://www.youtube.com/watch?v="

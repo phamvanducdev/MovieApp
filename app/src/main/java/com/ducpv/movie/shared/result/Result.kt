@@ -22,3 +22,7 @@ fun <T> Flow<T>.asResult(): Flow<Result<T>> {
         .onStart { emit(Result.Loading) }
         .catch { emit(Result.Error(it)) }
 }
+
+fun Result.Error.asException(): String {
+    return this.exception?.message.toString()
+}

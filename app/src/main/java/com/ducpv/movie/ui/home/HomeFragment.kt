@@ -40,7 +40,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     }
 
     override fun observeViewModel() {
-        super.observeViewModel()
         singleObserve(viewModel.uiState) {
             adapter.submitList(it.uiItems)
         }

@@ -1,5 +1,6 @@
 package com.ducpv.movie.ui.bookmark
 
+import android.text.Html
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest

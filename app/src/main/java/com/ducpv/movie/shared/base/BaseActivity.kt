@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.ViewDataBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Created by pvduc9773 on 25/07/2022.
@@ -29,5 +30,9 @@ abstract class BaseActivity<T : BaseViewModel, B : ViewDataBinding> : AppCompatA
         viewBinding()
         observeViewModel()
         events()
+    }
+
+    fun showSnackbar(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).show()
     }
 }

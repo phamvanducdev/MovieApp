@@ -10,10 +10,10 @@ import com.ducpv.movie.databinding.ItemHomeLoadingBinding
 import com.ducpv.movie.databinding.ItemHomeNowShowingsBinding
 import com.ducpv.movie.databinding.ItemMoviePopularBinding
 import com.ducpv.movie.domain.model.Movie
-import com.ducpv.movie.domain.service.Api
+import com.ducpv.movie.domain.service.MovieApi
 import com.ducpv.movie.shared.extension.dp
 import com.ducpv.movie.shared.extension.loadImage
-import com.ducpv.movie.shared.widget.SpacingItemDecoration
+import com.ducpv.movie.shared.widget.SpaceDecoration
 
 /**
  * Created by pvduc9773 on 29/11/2022.
@@ -105,7 +105,7 @@ class HomeAdapter(
 
         init {
             binding.rvMovies.adapter = nowShowingsAdapter
-            binding.rvMovies.addItemDecoration(SpacingItemDecoration(8.dp))
+            binding.rvMovies.addItemDecoration(SpaceDecoration(8.dp))
             binding.tvSeeMore.setOnClickListener {
                 onViewMorePopularClickListener.invoke()
             }
@@ -124,7 +124,7 @@ class HomeAdapter(
             binding.tvTitle.text = movie.title
             binding.tvVoting.text = String.format("%s/10 IMDb", movie.voteAverage)
             binding.tvOverview.text = movie.overview
-            binding.ivPoster.loadImage(Api.getPosterPath(movie.posterPath))
+            binding.ivPoster.loadImage(MovieApi.getPosterPath(movie.posterPath))
 
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)

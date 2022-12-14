@@ -19,6 +19,8 @@ fun View.setVisible(isVisible: Boolean) {
     if (isVisible) show() else hide()
 }
 
+fun View.isRtl() = layoutDirection == View.LAYOUT_DIRECTION_RTL
+
 fun View.hideKeyboard() {
     val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager
     inputMethodManager?.hideSoftInputFromWindow(this.windowToken, 0)

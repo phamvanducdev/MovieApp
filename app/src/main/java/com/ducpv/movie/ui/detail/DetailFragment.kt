@@ -2,10 +2,12 @@ package com.ducpv.movie.ui.detail
 
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.ducpv.movie.shared.base.BaseFragment
 import com.ducpv.movie.databinding.FragmentDetailBinding
+import com.ducpv.movie.shared.base.BaseFragment
 import com.ducpv.movie.shared.extension.hide
 import com.ducpv.movie.shared.extension.show
+import com.ducpv.movie.shared.result.Result
+import com.ducpv.movie.shared.result.asException
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -21,14 +23,18 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>() {
 
     override fun observeViewModel() {
         super.observeViewModel()
-        viewModel.uiState.observe(viewLifecycleOwner) {
+        viewModel.movieDetailState.observe(viewLifecycleOwner) {
             when (it) {
-                is DetailViewModel.MovieDetailUiState.Loading -> {
+                is Result.Success -> {
+                    binding.viewLoading.hide()
+                    binding.toolbar.title = it.data.title
+                }
+                is Result.Loading -> {
                     binding.viewLoading.show()
                 }
-                is DetailViewModel.MovieDetailUiState.Success -> {
-                    binding.viewLoading.hide()
-                    binding.toolbar.title = it.movie.title
+                is Result.Error -> {
+                    showSnackbar(it.asException())
+                    findNavController().popBackStack()
                 }
             }
         }

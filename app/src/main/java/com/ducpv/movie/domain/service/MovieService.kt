@@ -7,7 +7,7 @@ import retrofit2.http.Path
 /**
  * Created by pvduc9773 on 26/07/2022.
  */
-interface Service {
+interface MovieService {
     @GET("movie/now_playing")
     suspend fun getMoviesNowPlaying(): ApiResults<Movie>
 
