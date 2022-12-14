@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 /**
  * Created by pvduc9773 on 30/11/2022.
  */
-class SpacingItemDecoration @JvmOverloads constructor(
+class SpaceDecoration @JvmOverloads constructor(
     private val spacingPx: Int,
     private val enableStartSpacing: Boolean = false,
     private val enableEndSpacing: Boolean = false
@@ -47,7 +47,7 @@ class SpacingItemDecoration @JvmOverloads constructor(
         return if (parent.layoutManager is LinearLayoutManager) {
             (parent.layoutManager as? LinearLayoutManager)?.orientation
         } else {
-            throw IllegalStateException("SpacingItemDecoration can only be used with a LinearLayoutManager.")
+            throw IllegalStateException("SpacingDecoration can only be used with a LinearLayoutManager.")
         }
     }
 }

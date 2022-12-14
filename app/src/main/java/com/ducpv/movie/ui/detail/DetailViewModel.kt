@@ -2,12 +2,15 @@ package com.ducpv.movie.ui.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asLiveData
-import com.ducpv.movie.shared.base.BaseViewModel
-import com.ducpv.movie.domain.model.Movie
+import androidx.lifecycle.viewModelScope
 import com.ducpv.movie.domain.usecase.GetMovieDetailUseCase
+import com.ducpv.movie.shared.base.BaseViewModel
+import com.ducpv.movie.shared.result.Result
+import com.ducpv.movie.shared.result.asResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 
 /**
  * Created by pvduc9773 on 26/07/2022.
@@ -15,7 +18,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getMovieDetailUseCase: GetMovieDetailUseCase
+    getMovieDetailUseCase: GetMovieDetailUseCase
 ) : BaseViewModel() {
     companion object {
         const val MOVIE_ID_SAVED_STATE_KEY = "movieId"
@@ -23,18 +26,13 @@ class DetailViewModel @Inject constructor(
 
     private val movieId: String = savedStateHandle.get<String>(MOVIE_ID_SAVED_STATE_KEY)!!
 
-    private val _uiState = MutableStateFlow<MovieDetailUiState>(MovieDetailUiState.Loading)
-    val uiState = _uiState.asLiveData()
-
-    init {
-        onLaunchCoroutine {
-            val movie = getMovieDetailUseCase(movieId)
-            _uiState.value = MovieDetailUiState.Success(movie)
-        }
-    }
-
-    sealed interface MovieDetailUiState {
-        object Loading : MovieDetailUiState
-        data class Success(val movie: Movie) : MovieDetailUiState
-    }
+    private val _movieDetailState = getMovieDetailUseCase(movieId)
+    val movieDetailState = _movieDetailState
+        .asResult()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = Result.Loading
+        )
+        .asLiveData()
 }

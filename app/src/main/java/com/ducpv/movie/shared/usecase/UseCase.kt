@@ -6,6 +6,7 @@ import timber.log.Timber
  * Created by pvduc9773 on 08/08/2022.
  */
 abstract class UseCase<in P, R> {
+
     operator fun invoke(parameters: P): R {
         return try {
             execute(parameters)

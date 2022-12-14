@@ -10,6 +10,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.ducpv.movie.shared.utils.defaultNavOptions
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * Created by pvduc9773 on 25/07/2022.
@@ -54,5 +55,9 @@ abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : Fragment()
 
     fun navigateTo(directions: NavDirections, navOptions: NavOptions? = defaultNavOptions) {
         findNavController().navigate(directions, navOptions)
+    }
+
+    fun showSnackbar(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).show()
     }
 }

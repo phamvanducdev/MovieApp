@@ -1,8 +1,8 @@
 package com.ducpv.movie.di
 
-import com.ducpv.movie.domain.repository.Repository
-import com.ducpv.movie.domain.repository.RepositoryImpl
-import com.ducpv.movie.domain.service.Service
+import com.ducpv.movie.domain.repository.MovieRepository
+import com.ducpv.movie.domain.repository.MovieDataSource
+import com.ducpv.movie.domain.service.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +17,5 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Singleton
     @Provides
-    fun providesRepository(service: Service): Repository {
-        return RepositoryImpl(service)
-    }
+    fun providesRepository(movieService: MovieService): MovieRepository = MovieDataSource(movieService)
 }

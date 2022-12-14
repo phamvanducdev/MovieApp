@@ -23,10 +23,7 @@ class SharedPreferenceStorage @Inject constructor(context: Context) : Preference
     }
 
     private val prefs: Lazy<SharedPreferences> = lazy {
-        context.applicationContext.getSharedPreferences(
-            PREFS_NAME,
-            Context.MODE_PRIVATE
-        ).apply {
+        context.applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).apply {
             registerOnSharedPreferenceChangeListener(changeListener)
         }
     }

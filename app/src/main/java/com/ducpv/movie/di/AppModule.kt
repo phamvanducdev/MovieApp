@@ -1,9 +1,10 @@
 package com.ducpv.movie.di
 
 import android.content.Context
-import com.ducpv.movie.shared.data.database.AppDatabase
 import com.ducpv.movie.shared.data.prefs.PreferenceStorage
 import com.ducpv.movie.shared.data.prefs.SharedPreferenceStorage
+import com.ducpv.movie.shared.network.ConnectivityManagerNetworkMonitor
+import com.ducpv.movie.shared.network.NetworkMonitor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -23,10 +24,9 @@ object AppModule {
     @Provides
     fun providesGson(): Gson = GsonBuilder().create()
 
+    @Singleton
     @Provides
-    fun provideContext(@ApplicationContext context: Context): Context {
-        return context.applicationContext
-    }
+    fun providesContext(@ApplicationContext context: Context): Context = context.applicationContext
 
     @Singleton
     @Provides
@@ -34,5 +34,5 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.buildDatabase(context)
+    fun providesNetworkMonitor(@ApplicationContext context: Context): NetworkMonitor = ConnectivityManagerNetworkMonitor(context)
 }
