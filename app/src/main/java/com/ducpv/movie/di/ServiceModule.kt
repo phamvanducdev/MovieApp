@@ -1,7 +1,7 @@
 package com.ducpv.movie.di
 
 import com.ducpv.movie.BuildConfig
-import com.ducpv.movie.domain.service.Service
+import com.ducpv.movie.domain.service.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +20,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
-
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
@@ -69,5 +68,5 @@ object ServiceModule {
 
     @Singleton
     @Provides
-    fun provideService(retrofit: Retrofit): Service = retrofit.create(Service::class.java)
+    fun provideService(retrofit: Retrofit): MovieService = retrofit.create(MovieService::class.java)
 }
