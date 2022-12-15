@@ -13,7 +13,7 @@ import com.ducpv.movie.shared.utils.defaultNavOptions
 import com.google.android.material.snackbar.Snackbar
 
 /**
- * Created by pvduc9773 on 25/07/2022.
+ * Created by ducpv on 25/07/2022.
  */
 abstract class BaseFragment<T : BaseViewModel, B : ViewDataBinding> : Fragment() {
 

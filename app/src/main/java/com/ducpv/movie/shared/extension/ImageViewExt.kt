@@ -6,7 +6,7 @@ import com.ducpv.movie.R
 import java.io.File
 
 /**
- * Created by pvduc9773 on 24/10/2022.
+ * Created by ducpv on 24/10/2022.
  */
 fun ImageView.loadImage(file: File?) {
     Glide

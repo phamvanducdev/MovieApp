@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 
 /**
- * Created by pvduc9773 on 15/12/2022.
+ * Created by ducpv on 15/12/2022.
  */
 class ConnectivityManagerNetworkMonitor @Inject constructor(
     @ApplicationContext private val context: Context

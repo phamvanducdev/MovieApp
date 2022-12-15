@@ -9,7 +9,7 @@ import com.ducpv.movie.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Created by pvduc9773 on 26/10/2022.
+ * Created by ducpv on 26/10/2022.
  */
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {

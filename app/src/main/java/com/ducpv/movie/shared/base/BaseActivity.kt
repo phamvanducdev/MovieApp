@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
 
 /**
- * Created by pvduc9773 on 25/07/2022.
+ * Created by ducpv on 25/07/2022.
  */
 abstract class BaseActivity<T : BaseViewModel, B : ViewDataBinding> : AppCompatActivity() {
 

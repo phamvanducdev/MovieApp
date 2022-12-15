@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 /**
- * Created by pvduc9773 on 30/11/2022.
+ * Created by ducpv on 30/11/2022.
  */
 class SpaceDecoration @JvmOverloads constructor(
     private val spacingPx: Int,

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
 /**
- * Created by pvduc9773 on 09/12/2022.
+ * Created by ducpv on 09/12/2022.
  */
 abstract class FlowUseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
     operator fun invoke(parameters: P): Flow<R> {

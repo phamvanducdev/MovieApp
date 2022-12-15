@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Created by pvduc9773 on 29/11/2022.
+ * Created by ducpv on 29/11/2022.
  */
 class GetMoviesNowPlayingUseCase @Inject constructor(
     @DefaultDispatcher private val coroutineDispatcher: CoroutineDispatcher,

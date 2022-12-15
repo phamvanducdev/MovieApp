@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 
 /**
- * Created by pvduc9773 on 26/07/2022.
+ * Created by ducpv on 26/07/2022.
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(

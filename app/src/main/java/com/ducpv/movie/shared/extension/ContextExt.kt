@@ -11,7 +11,7 @@ import com.ducpv.movie.shared.common.setNegativeButton
 import com.ducpv.movie.shared.common.setPositiveButton
 
 /**
- * Created by pvduc9773 on 26/07/2022.
+ * Created by ducpv on 26/07/2022.
  */
 fun Context.isPermissionGranted(permission: String): Boolean =
     checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED

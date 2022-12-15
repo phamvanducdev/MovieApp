@@ -6,7 +6,7 @@ import kotlinx.coroutines.*
 import timber.log.Timber
 
 /**
- * Created by pvduc9773 on 25/07/2022.
+ * Created by ducpv on 25/07/2022.
  */
 abstract class BaseViewModel : ViewModel() {
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, e ->

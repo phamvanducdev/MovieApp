@@ -7,7 +7,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.CoroutineDispatcher
 
 /**
- * Created by pvduc9773 on 15/12/2022.
+ * Created by ducpv on 15/12/2022.
  */
 class UnBookmarkMovieUseCase @Inject constructor(
     @DefaultDispatcher private val coroutineDispatcher: CoroutineDispatcher,

@@ -6,7 +6,7 @@ import com.ducpv.movie.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
- * Created by pvduc9773 on 26/10/2022.
+ * Created by ducpv on 26/10/2022.
  */
 class CommonDialog private constructor() {
     companion object {

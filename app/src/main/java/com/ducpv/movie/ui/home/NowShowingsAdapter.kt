@@ -11,7 +11,7 @@ import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.service.MovieApi
 
 /**
- * Created by pvduc9773 on 29/11/2022.
+ * Created by ducpv on 29/11/2022.
  */
 class NowShowingsAdapter(
     private val onItemMovieClickListener: (Movie) -> Unit

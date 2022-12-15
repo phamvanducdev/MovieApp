@@ -8,7 +8,7 @@ import com.ducpv.movie.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- * Created by pvduc9773 on 09/12/2022.
+ * Created by ducpv on 09/12/2022.
  */
 @AndroidEntryPoint
 class OnboardingActivity : BaseActivity<OnboardingViewModel, ActivityOnboardingBinding>() {

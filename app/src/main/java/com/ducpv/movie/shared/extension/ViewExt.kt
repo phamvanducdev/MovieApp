@@ -5,7 +5,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 /**
- * Created by pvduc9773 on 26/07/2022.
+ * Created by ducpv on 26/07/2022.
  */
 fun View.show() {
     this.visibility = View.VISIBLE

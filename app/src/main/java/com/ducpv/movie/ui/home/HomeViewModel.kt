@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 /**
- * Created by pvduc9773 on 26/07/2022.
+ * Created by ducpv on 26/07/2022.
  */
 @HiltViewModel
 class HomeViewModel @Inject constructor(

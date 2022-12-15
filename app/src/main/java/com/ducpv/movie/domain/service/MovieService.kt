@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
- * Created by pvduc9773 on 26/07/2022.
+ * Created by ducpv on 26/07/2022.
  */
 interface MovieService {
     @GET("movie/now_playing")

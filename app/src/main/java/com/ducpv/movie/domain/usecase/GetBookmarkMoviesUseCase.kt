@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 /**
- * Created by pvduc9773 on 15/12/2022.
+ * Created by ducpv on 15/12/2022.
  */
 class GetBookmarkMoviesUseCase @Inject constructor(
     @DefaultDispatcher private val coroutineDispatcher: CoroutineDispatcher,

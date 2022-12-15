@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 
 /**
- * Created by pvduc9773 on 09/12/2022.
+ * Created by ducpv on 09/12/2022.
  */
 sealed interface Result<out T> {
     data class Success<T>(val data: T) : Result<T>

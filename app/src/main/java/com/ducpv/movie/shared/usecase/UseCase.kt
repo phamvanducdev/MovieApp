@@ -3,7 +3,7 @@ package com.ducpv.movie.shared.usecase
 import timber.log.Timber
 
 /**
- * Created by pvduc9773 on 08/08/2022.
+ * Created by ducpv on 08/08/2022.
  */
 abstract class UseCase<in P, R> {
 

@@ -5,7 +5,7 @@ import com.ducpv.movie.shared.usecase.UseCase
 import javax.inject.Inject
 
 /**
- * Created by pvduc9773 on 09/12/2022.
+ * Created by ducpv on 09/12/2022.
  */
 class OnboardingCompletedUseCase @Inject constructor(
     private val preferenceStorage: PreferenceStorage,

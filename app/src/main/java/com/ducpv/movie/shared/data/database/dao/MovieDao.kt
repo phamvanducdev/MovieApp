@@ -5,7 +5,7 @@ import com.ducpv.movie.shared.data.database.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Created by pvduc9773 on 12/12/2022.
+ * Created by ducpv on 12/12/2022.
  */
 @Dao
 interface MovieDao {

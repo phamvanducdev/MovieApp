@@ -11,7 +11,7 @@ import com.ducpv.movie.domain.service.MovieApi
 import com.ducpv.movie.shared.extension.loadImage
 
 /**
- * Created by pvduc9773 on 29/11/2022.
+ * Created by ducpv on 29/11/2022.
  */
 class BookmarkAdapter(
     private val onItemMovieClickListener: (Movie) -> Unit,

@@ -9,7 +9,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.delay
 
 /**
- * Created by pvduc9773 on 09/12/2022.
+ * Created by ducpv on 09/12/2022.
  */
 @HiltViewModel
 class LaunchViewModel @Inject constructor(

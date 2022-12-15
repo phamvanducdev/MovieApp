@@ -1,7 +1,7 @@
 package com.ducpv.movie.domain.service
 
 /**
- * Created by pvduc9773 on 01/12/2022.
+ * Created by ducpv on 01/12/2022.
  */
 object MovieApi {
     private const val BASE_POSTER_PATH = "https://image.tmdb.org/t/p/w342"

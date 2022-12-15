@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.ducpv.movie.domain.model.Movie
 
 /**
- * Created by pvduc9773 on 12/12/2022.
+ * Created by ducpv on 12/12/2022.
  */
 @Entity(
     tableName = "movies",

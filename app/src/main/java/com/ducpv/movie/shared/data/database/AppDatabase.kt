@@ -8,7 +8,7 @@ import com.ducpv.movie.shared.data.database.dao.MovieDao
 import com.ducpv.movie.shared.data.database.entity.MovieEntity
 
 /**
- * Created by pvduc9773 on 09/12/2022.
+ * Created by ducpv on 09/12/2022.
  */
 @Database(
     entities = [

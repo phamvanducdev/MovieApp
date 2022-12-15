@@ -4,7 +4,7 @@ import android.app.Activity
 import android.view.WindowManager
 
 /**
- * Created by pvduc9773 on 24/11/2022.
+ * Created by ducpv on 24/11/2022.
  */
 fun Activity.fitsSystemWindows(enabled: Boolean) {
     if (enabled) {

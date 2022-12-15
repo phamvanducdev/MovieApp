@@ -3,7 +3,7 @@ package com.ducpv.movie.ui.main
 import androidx.fragment.app.Fragment
 
 /**
- * Created by pvduc9773 on 28/11/2022.
+ * Created by ducpv on 28/11/2022.
  */
 interface BottomNavigationListener {
     fun onBackToRoot()

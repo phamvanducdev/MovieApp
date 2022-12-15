@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 /**
- * Created by pvduc9773 on 20/11/2022.
+ * Created by ducpv on 20/11/2022.
  */
 suspend fun <T, V> Iterable<T>.asyncAll(
     context: CoroutineContext = EmptyCoroutineContext,
