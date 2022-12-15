@@ -20,7 +20,7 @@ data class MovieEntity(
     val voteCount: Long,
 )
 
-fun MovieEntity.asExternalModel() = Movie(
+fun Movie.asEntity() = MovieEntity(
     id = id,
     title = title,
     overview = overview,
@@ -29,3 +29,11 @@ fun MovieEntity.asExternalModel() = Movie(
     voteCount = voteCount,
 )
 
+fun MovieEntity.asExternalModel() = Movie(
+    id = id,
+    title = title,
+    overview = overview,
+    posterPath = posterPath,
+    voteAverage = voteAverage,
+    voteCount = voteCount,
+)
