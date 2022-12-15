@@ -16,9 +16,11 @@ import kotlinx.coroutines.flow.stateIn
 class MainViewModel @Inject constructor(
     networkMonitor: NetworkMonitor
 ) : BaseViewModel() {
-    val networkState = networkMonitor.isOnline.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5_000),
-        initialValue = true
-    ).asLiveData()
+    val networkState = networkMonitor.isOnline
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = true
+        )
+        .asLiveData()
 }

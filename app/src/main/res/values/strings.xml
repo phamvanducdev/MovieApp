@@ -7,4 +7,6 @@
     <string name="see_more">See more</string>
     <string name="popular">Popular</string>
     <string name="notification">Notification</string>
+    <string name="no_saved_bookmarks">No saved bookmarks</string>
+    <string name="data_not_yet">Data not yet</string>
 </resources>
