@@ -24,9 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
         private const val databaseName = "movie-db"
 
         fun buildDatabase(context: Context): AppDatabase {
-            return Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
-                .fallbackToDestructiveMigration()
-                .build()
+            return Room.databaseBuilder(context, AppDatabase::class.java, databaseName).build()
         }
     }
 }

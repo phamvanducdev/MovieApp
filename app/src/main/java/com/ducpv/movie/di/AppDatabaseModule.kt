@@ -6,6 +6,7 @@ import com.ducpv.movie.shared.data.database.dao.MovieDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -17,9 +18,8 @@ import javax.inject.Singleton
 object AppDatabaseModule {
     @Singleton
     @Provides
-    fun providesAppDatabase(context: Context): AppDatabase = AppDatabase.buildDatabase(context)
+    fun providesAppDatabase(@ApplicationContext context: Context): AppDatabase = AppDatabase.buildDatabase(context)
 
-    @Singleton
     @Provides
     fun providesMovieDao(database: AppDatabase): MovieDao = database.movieDao()
 }

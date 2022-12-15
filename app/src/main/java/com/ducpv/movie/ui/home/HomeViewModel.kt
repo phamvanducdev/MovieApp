@@ -1,7 +1,10 @@
 package com.ducpv.movie.ui.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.ducpv.movie.domain.model.Movie
+import com.ducpv.movie.domain.usecase.BookmarkMovieUseCase
 import com.ducpv.movie.domain.usecase.GetMoviesNowPlayingUseCase
 import com.ducpv.movie.domain.usecase.GetMoviesPopularUseCase
 import com.ducpv.movie.shared.base.BaseViewModel
@@ -21,17 +24,27 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 class HomeViewModel @Inject constructor(
     private val networkMonitor: NetworkMonitor,
     private val getMoviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
-    private val getMoviesPopularUseCase: GetMoviesPopularUseCase
+    private val getMoviesPopularUseCase: GetMoviesPopularUseCase,
+    private val bookmarkMovieUseCase: BookmarkMovieUseCase
 ) : BaseViewModel() {
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState = _uiState.asLiveData()
+
+    private val _navigationMovieDetail = MutableLiveData<String>()
+    val navigationMovieDetail: LiveData<String> = _navigationMovieDetail
 
     init {
         onLaunchCoroutine {
             networkMonitor.isOnline
                 .distinctUntilChanged()
-                .collect {
-                    fetchData()
+                .collect { isOnline ->
+                    if (isOnline) {
+                        fetchData()
+                    } else {
+                        if (_uiState.value !is HomeUiState.Success) {
+                            _uiState.value = HomeUiState.Error
+                        }
+                    }
                 }
         }
     }
@@ -57,6 +70,13 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+    }
+
+    fun onClickMovieDetail(movie: Movie) {
+        onLaunchCoroutine {
+            bookmarkMovieUseCase(listOf(movie))
+            _navigationMovieDetail.postValue(movie.id)
+        }
     }
 }
 
@@ -91,4 +111,6 @@ sealed interface HomeUiState {
             }
             return items
         }
+
+    val emptyView: Boolean get() = uiItems.isEmpty() || this is Error
 }

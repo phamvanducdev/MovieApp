@@ -1,9 +1,6 @@
 package com.ducpv.movie.shared.data.database.dao
 
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Update
-import androidx.room.Upsert
+import androidx.room.*
 import com.ducpv.movie.shared.data.database.entity.MovieEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -13,11 +10,17 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
     @Query(value = "SELECT * FROM movies")
-    fun getMovieEntities(): Flow<List<MovieEntity>>
+    fun getMovies(): Flow<List<MovieEntity>>
 
     @Update
     suspend fun updateMovies(entities: List<MovieEntity>)
 
     @Upsert
     suspend fun upsertMovies(entities: List<MovieEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertMovies(entities: List<MovieEntity>)
+
+    @Query(value = """DELETE FROM movies WHERE id in (:ids)""")
+    suspend fun deleteMovies(ids: List<String>)
 }
