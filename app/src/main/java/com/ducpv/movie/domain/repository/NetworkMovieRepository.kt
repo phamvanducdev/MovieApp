@@ -9,17 +9,17 @@ import kotlinx.coroutines.flow.flow
 /**
  * Created by ducpv on 26/07/2022.
  */
-interface MovieRepository {
-    fun getMoviesNowPlaying(): Flow<List<Movie>>
+interface NetworkMovieRepository {
+    fun getMoviesShowing(): Flow<List<Movie>>
     fun getMoviesPopular(): Flow<List<Movie>>
     fun getMovieDetail(movieId: String): Flow<Movie>
 }
 
-class MovieDataSource @Inject constructor(
+class NetworkMovieRepositoryImpl @Inject constructor(
     private val movieService: MovieService
-) : MovieRepository {
-    override fun getMoviesNowPlaying(): Flow<List<Movie>> = flow {
-        emit(movieService.getMoviesNowPlaying().results)
+) : NetworkMovieRepository {
+    override fun getMoviesShowing(): Flow<List<Movie>> = flow {
+        emit(movieService.getMoviesShowing().results)
     }
 
     override fun getMoviesPopular(): Flow<List<Movie>> = flow {

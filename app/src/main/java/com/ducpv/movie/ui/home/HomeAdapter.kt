@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ducpv.movie.databinding.ItemHomeHeaderPopularBinding
 import com.ducpv.movie.databinding.ItemHomeLoadingBinding
-import com.ducpv.movie.databinding.ItemHomeNowShowingsBinding
+import com.ducpv.movie.databinding.ItemHomeMoviesShowingsBinding
 import com.ducpv.movie.databinding.ItemMoviePopularBinding
 import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.service.MovieApi
@@ -20,7 +20,8 @@ import com.ducpv.movie.shared.widget.SpaceDecoration
  */
 class HomeAdapter(
     private val onItemMovieClickListener: (Movie) -> Unit,
-    private val onViewMoreNowShowingClickListener: () -> Unit,
+    private val onBookmarkMovieClickListener: (Movie) -> Unit,
+    private val onViewMoreShowingClickListener: () -> Unit,
     private val onViewMorePopularClickListener: () -> Unit,
 ) : ListAdapter<ItemHomeUi, RecyclerView.ViewHolder>(HomeDiffCallBack) {
     object HomeDiffCallBack : DiffUtil.ItemCallback<ItemHomeUi>() {
@@ -35,11 +36,12 @@ class HomeAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            ItemHomeUiType.NOW_SHOWINGS.type -> {
-                ItemHomeNowShowingsVH(
-                    ItemHomeNowShowingsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            ItemHomeUiType.SHOWINGS.type -> {
+                ItemHomeShowingsVH(
+                    ItemHomeMoviesShowingsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
                     onItemMovieClickListener,
-                    onViewMoreNowShowingClickListener
+                    onBookmarkMovieClickListener,
+                    onViewMoreShowingClickListener
                 )
             }
             ItemHomeUiType.HEADER_POPULARS.type -> {
@@ -51,7 +53,8 @@ class HomeAdapter(
             ItemHomeUiType.MOVIE_POPULAR.type -> {
                 ItemHomeMoviePopularVH(
                     ItemMoviePopularBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                    onItemMovieClickListener
+                    onItemMovieClickListener,
+                    onBookmarkMovieClickListener
                 )
             }
             else -> {
@@ -64,8 +67,8 @@ class HomeAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is ItemHomeNowShowingsVH -> {
-                val movies = (getItem(position) as? ItemHomeUi.ItemNowShowings)?.movies.orEmpty()
+            is ItemHomeShowingsVH -> {
+                val movies = (getItem(position) as? ItemHomeUi.ItemShowings)?.movies.orEmpty()
                 holder.bind(movies)
             }
             is ItemHomeMoviePopularVH -> {
@@ -94,38 +97,46 @@ class HomeAdapter(
         }
     }
 
-    class ItemHomeNowShowingsVH(
-        private val binding: ItemHomeNowShowingsBinding,
+    class ItemHomeShowingsVH(
+        private val binding: ItemHomeMoviesShowingsBinding,
         private val onItemMovieClickListener: (Movie) -> Unit,
-        private val onViewMorePopularClickListener: () -> Unit,
+        private val onBookmarkMovieClickListener: (Movie) -> Unit,
+        private val onViewMoreShowingsClickListener: () -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
-        private val nowShowingsAdapter: NowShowingsAdapter by lazy {
-            NowShowingsAdapter(onItemMovieClickListener)
+        private val moviesShowingAdapter: MoviesShowingAdapter by lazy {
+            MoviesShowingAdapter(onItemMovieClickListener, onBookmarkMovieClickListener)
         }
 
         init {
-            binding.rvMovies.adapter = nowShowingsAdapter
+            binding.rvMovies.adapter = moviesShowingAdapter
             binding.rvMovies.addItemDecoration(SpaceDecoration(8.dp))
             binding.tvSeeMore.setOnClickListener {
-                onViewMorePopularClickListener.invoke()
+                onViewMoreShowingsClickListener.invoke()
             }
         }
 
         fun bind(movies: List<Movie>) {
-            nowShowingsAdapter.submitList(movies)
+            moviesShowingAdapter.submitList(movies)
         }
     }
 
     class ItemHomeMoviePopularVH(
         private val binding: ItemMoviePopularBinding,
-        private val onItemMovieClickListener: (Movie) -> Unit
+        private val onItemMovieClickListener: (Movie) -> Unit,
+        private val onBookmarkMovieClickListener: (Movie) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.tvTitle.text = movie.title
             binding.tvVoting.text = String.format("%s/10 IMDb", movie.voteAverage)
             binding.tvOverview.text = movie.overview
             binding.ivPoster.loadImage(MovieApi.getPosterPath(movie.posterPath))
-
+            binding.cbBookmark.isChecked = movie.isBookmarked
+            binding.cbBookmark.setOnCheckedChangeListener { compoundButton, checked ->
+                if (compoundButton.isPressed) {
+                    movie.isBookmarked = checked
+                    onBookmarkMovieClickListener.invoke(movie)
+                }
+            }
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)
             }
@@ -135,7 +146,7 @@ class HomeAdapter(
 
 enum class ItemHomeUiType(val type: Int) {
     LOADING(0),
-    NOW_SHOWINGS(1),
+    SHOWINGS(1),
     HEADER_POPULARS(2),
     MOVIE_POPULAR(3)
 }
@@ -149,9 +160,9 @@ sealed class ItemHomeUi(
         type = ItemHomeUiType.LOADING
     )
 
-    class ItemNowShowings(val movies: List<Movie>) : ItemHomeUi(
-        id = ItemHomeUiType.NOW_SHOWINGS.name,
-        type = ItemHomeUiType.NOW_SHOWINGS
+    class ItemShowings(val movies: List<Movie>) : ItemHomeUi(
+        id = ItemHomeUiType.SHOWINGS.name,
+        type = ItemHomeUiType.SHOWINGS
     )
 
     class ItemHeaderPopulars : ItemHomeUi(

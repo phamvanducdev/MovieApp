@@ -2,8 +2,8 @@ package com.ducpv.movie.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.ducpv.movie.shared.base.BaseViewModel
 import com.ducpv.movie.domain.usecase.OnboardingCompletedUseCase
+import com.ducpv.movie.shared.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.delay
@@ -21,7 +21,7 @@ class LaunchViewModel @Inject constructor(
     init {
         onLaunchCoroutine {
             delay(3_000L)
-            if (onboardingCompletedUseCase(Unit)) {
+            if (onboardingCompletedUseCase()) {
                 _onLaunchDestination.postValue(LaunchDestination.MAIN_ACTIVITY)
             } else {
                 _onLaunchDestination.postValue(LaunchDestination.ONBOARDING)

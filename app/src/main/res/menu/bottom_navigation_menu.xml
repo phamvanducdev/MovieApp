@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/tab_home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/ic_navigation_home"
         android:title="@string/home" />
     <item
         android:id="@+id/tab_bookmark"
-        android:icon="@drawable/ic_bookmark"
+        android:icon="@drawable/ic_navigation_bookmark"
         android:title="@string/bookmark" />
 </menu>

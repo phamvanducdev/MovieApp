@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.ducpv.movie.domain.model.Movie
-import com.ducpv.movie.domain.usecase.GetBookmarkMoviesUseCase
-import com.ducpv.movie.domain.usecase.UnBookmarkMovieUseCase
+import com.ducpv.movie.domain.usecase.GetMoviesBookmarkedUseCase
 import com.ducpv.movie.shared.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,10 +17,9 @@ import kotlinx.coroutines.flow.stateIn
  */
 @HiltViewModel
 class BookmarkViewModel @Inject constructor(
-    getBookmarkMoviesUseCase: GetBookmarkMoviesUseCase,
-    private val unBookmarkMovieUseCase: UnBookmarkMovieUseCase
+    getMoviesBookmarkedUseCase: GetMoviesBookmarkedUseCase,
 ) : BaseViewModel() {
-    val uiState = getBookmarkMoviesUseCase(Unit)
+    val uiState = getMoviesBookmarkedUseCase()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(5_000),
@@ -34,7 +32,6 @@ class BookmarkViewModel @Inject constructor(
 
     fun onClickMovieDetail(movie: Movie) {
         onLaunchCoroutine {
-            unBookmarkMovieUseCase(listOf(movie).map(Movie::id))
             _navigationMovieDetail.postValue(movie.id)
         }
     }

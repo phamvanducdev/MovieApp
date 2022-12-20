@@ -10,12 +10,12 @@ import kotlinx.coroutines.flow.combine
 /**
  * Created by ducpv on 29/11/2022.
  */
-class GetMoviesPopularUseCase @Inject constructor(
+class GetMoviesShowingUseCase @Inject constructor(
     private val offlineMovieRepository: OfflineMovieRepository,
     private val networkMovieRepository: NetworkMovieRepository
 ) {
     operator fun invoke(): Flow<List<Movie>> = combine(
-        networkMovieRepository.getMoviesPopular(),
+        networkMovieRepository.getMoviesShowing(),
         offlineMovieRepository.getMovies()
     ) { networkMovies, moviesBookmarked ->
         networkMovies.map { movie ->

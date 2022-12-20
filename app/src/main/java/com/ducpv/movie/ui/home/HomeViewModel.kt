@@ -1,12 +1,11 @@
 package com.ducpv.movie.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.usecase.BookmarkMovieUseCase
-import com.ducpv.movie.domain.usecase.GetMoviesNowPlayingUseCase
 import com.ducpv.movie.domain.usecase.GetMoviesPopularUseCase
+import com.ducpv.movie.domain.usecase.GetMoviesShowingUseCase
+import com.ducpv.movie.domain.usecase.UnBookmarkMovieUseCase
 import com.ducpv.movie.shared.base.BaseViewModel
 import com.ducpv.movie.shared.network.NetworkMonitor
 import com.ducpv.movie.shared.result.Result
@@ -23,15 +22,13 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val networkMonitor: NetworkMonitor,
-    private val getMoviesNowPlayingUseCase: GetMoviesNowPlayingUseCase,
+    private val getMoviesShowingUseCase: GetMoviesShowingUseCase,
     private val getMoviesPopularUseCase: GetMoviesPopularUseCase,
-    private val bookmarkMovieUseCase: BookmarkMovieUseCase
+    private val bookmarkMovieUseCase: BookmarkMovieUseCase,
+    private val unBookmarkMovieUseCase: UnBookmarkMovieUseCase
 ) : BaseViewModel() {
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState = _uiState.asLiveData()
-
-    private val _navigationMovieDetail = MutableLiveData<String>()
-    val navigationMovieDetail: LiveData<String> = _navigationMovieDetail
 
     init {
         onLaunchCoroutine {
@@ -51,16 +48,16 @@ class HomeViewModel @Inject constructor(
 
     private suspend fun fetchData() {
         combine(
-            getMoviesNowPlayingUseCase(Unit),
-            getMoviesPopularUseCase(Unit),
+            getMoviesShowingUseCase(),
+            getMoviesPopularUseCase(),
             ::Pair
         )
             .asResult()
             .collect { result ->
                 when (result) {
                     is Result.Success -> {
-                        val (nowShowings, populars) = result.data
-                        _uiState.value = HomeUiState.Success(nowShowings, populars)
+                        val (showings, populars) = result.data
+                        _uiState.value = HomeUiState.Success(showings, populars)
                     }
                     is Result.Loading -> {
                         _uiState.value = HomeUiState.Loading
@@ -72,17 +69,20 @@ class HomeViewModel @Inject constructor(
             }
     }
 
-    fun onClickMovieDetail(movie: Movie) {
+    fun onClickBookmarkMovie(movie: Movie) {
         onLaunchCoroutine {
-            bookmarkMovieUseCase(listOf(movie))
-            _navigationMovieDetail.postValue(movie.id)
+            if (movie.isBookmarked) {
+                bookmarkMovieUseCase(movie)
+            } else {
+                unBookmarkMovieUseCase(movie.id)
+            }
         }
     }
 }
 
 sealed interface HomeUiState {
     data class Success(
-        val nowShowings: List<Movie> = emptyList(),
+        val showings: List<Movie> = emptyList(),
         val populars: List<Movie> = emptyList()
     ) : HomeUiState
 
@@ -94,8 +94,8 @@ sealed interface HomeUiState {
             val items = mutableListOf<ItemHomeUi>()
             when (this) {
                 is Success -> {
-                    if (nowShowings.isNotEmpty()) {
-                        items.add(ItemHomeUi.ItemNowShowings(nowShowings))
+                    if (showings.isNotEmpty()) {
+                        items.add(ItemHomeUi.ItemShowings(showings))
                     }
                     if (populars.isNotEmpty()) {
                         items.add(ItemHomeUi.ItemHeaderPopulars())

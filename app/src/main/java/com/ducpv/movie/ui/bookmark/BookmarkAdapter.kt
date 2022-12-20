@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ducpv.movie.databinding.ItemMoviePopularBinding
 import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.service.MovieApi
+import com.ducpv.movie.shared.extension.hide
 import com.ducpv.movie.shared.extension.loadImage
 
 /**
@@ -46,6 +47,7 @@ class BookmarkAdapter(
             binding.tvVoting.text = String.format("%s/10 IMDb", movie.voteAverage)
             binding.tvOverview.text = movie.overview
             binding.ivPoster.loadImage(MovieApi.getPosterPath(movie.posterPath))
+            binding.cbBookmark.hide()
 
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)

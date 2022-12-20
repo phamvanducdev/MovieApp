@@ -9,6 +9,7 @@ import javax.inject.Singleton
 /**
  * Created by ducpv on 09/12/2022.
  */
+// TODO use data store
 interface PreferenceStorage {
     fun registerOnPreferenceChangeListener(onChangeListener: SharedPreferences.OnSharedPreferenceChangeListener)
     var onboardingCompleted: Boolean

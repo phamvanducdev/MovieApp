@@ -1,7 +1,6 @@
 package com.ducpv.movie.domain.usecase
 
 import com.ducpv.movie.shared.data.prefs.PreferenceStorage
-import com.ducpv.movie.shared.usecase.UseCase
 import javax.inject.Inject
 
 /**
@@ -9,8 +8,8 @@ import javax.inject.Inject
  */
 open class OnboardingCompleteActionUseCase @Inject constructor(
     private val preferenceStorage: PreferenceStorage
-) : UseCase<Boolean, Unit>() {
-    override fun execute(parameters: Boolean) {
-        preferenceStorage.onboardingCompleted = parameters
+) {
+    operator fun invoke(isCompleted: Boolean) {
+        preferenceStorage.onboardingCompleted = isCompleted
     }
 }

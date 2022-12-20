@@ -22,9 +22,12 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private val adapter: HomeAdapter by lazy {
         HomeAdapter(
             onItemMovieClickListener = {
-                viewModel.onClickMovieDetail(it)
+                navigateTo(MainFragmentDirections.actionMainFragmentToDetailFragment(it.id))
             },
-            onViewMoreNowShowingClickListener = {},
+            onBookmarkMovieClickListener = {
+                viewModel.onClickBookmarkMovie(it)
+            },
+            onViewMoreShowingClickListener = {},
             onViewMorePopularClickListener = {}
         )
     }
@@ -44,9 +47,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         singleObserve(viewModel.uiState) {
             adapter.submitList(it.uiItems)
             binding.tvEmpty.setVisible(it.emptyView)
-        }
-        singleObserve(viewModel.navigationMovieDetail) {
-            navigateTo(MainFragmentDirections.actionMainFragmentToDetailFragment(it))
         }
     }
 }

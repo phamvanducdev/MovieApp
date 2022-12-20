@@ -12,4 +12,6 @@ data class Movie(
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("vote_average") val voteAverage: Double,
     @SerializedName("vote_count") val voteCount: Long,
-)
+) {
+    var isBookmarked: Boolean = false
+}
