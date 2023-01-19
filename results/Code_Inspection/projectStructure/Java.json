@@ -1,0 +1,12 @@
+{
+  "modules": [
+    {
+      "name": "MovieApp",
+      "languageLevel": 17
+    },
+    {
+      "name": "MovieApp.app",
+      "languageLevel": 17
+    }
+  ]
+}

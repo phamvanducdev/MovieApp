@@ -1,0 +1,13 @@
+{
+  "total": 0,
+  "tools inspection": {
+    "Code Inspection": 0
+  },
+  "attributes": {
+    "vcs": {
+      "sarifIdea": {}
+    },
+    "deviceId": "200820300000000-559b-4841-43ef-564f8f9c4571",
+    "jobUrl": "https://github.com/phamvanducdev/MovieApp/actions/runs/3954932386"
+  }
+}

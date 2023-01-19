@@ -1,0 +1,14 @@
+{
+  "libraries": [
+    {
+      "name": "Gradle: kaptGeneratedClasses",
+      "roots": [
+        "file://$PROJECT_DIR$/app/build/tmp/kapt3/classes/debug",
+        "file://$PROJECT_DIR$/app/build/tmp/kapt3/classes/debugAndroidTest",
+        "file://$PROJECT_DIR$/app/build/tmp/kapt3/classes/debugUnitTest",
+        "file://$PROJECT_DIR$/app/build/tmp/kapt3/classes/release",
+        "file://$PROJECT_DIR$/app/build/tmp/kapt3/classes/releaseUnitTest"
+      ]
+    }
+  ]
+}
