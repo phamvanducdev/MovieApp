@@ -2,11 +2,11 @@
   "modules": [
     {
       "name": "MovieApp",
-      "languageLevel": 17
+      "languageLevel": 11
     },
     {
       "name": "MovieApp.app",
-      "languageLevel": 17
+      "languageLevel": 11
     }
   ]
 }
