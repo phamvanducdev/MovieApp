@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:collapsedTitleGravity="start"
+                app:collapsedTitleTextAppearance="@style/TextAppearanceMulish.TitleSmall"
+                app:collapsedTitleTextColor="@color/primary"
+                app:contentScrim="@color/white"
+                app:expandedTitleGravity="start|bottom"
+                app:expandedTitleMarginBottom="80dp"
+                app:expandedTitleMarginStart="16dp"
+                app:expandedTitleTextAppearance="@style/TextAppearanceMulish.TitleMedium"
+                app:expandedTitleTextColor="@color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:maxLines="2"
+                app:scrimAnimationDuration="0"
+                app:statusBarScrim="@color/white"
+                app:titleCollapseMode="fade"
+                app:titleEnabled="false">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_backdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:fitsSystemWindows="true"
+                    android:scaleType="centerCrop"
+                    app:layout_collapseMode="parallax"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/toolbar_menu_detail"
+                    app:navigationIcon="@drawable/ic_back"
+                    app:navigationIconTint="@color/primary"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_white_corner_top"
+            app:behavior_overlapTop="64dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title"
+                    style="@style/TextAppearanceMulish.TitleMedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/cb_bookmark"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Spiderman: No Way Home" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cb_bookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:button="@drawable/ic_bookmark_movie"
+                    android:checked="false"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:checked="true" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_rating"
+                    style="@style/TextAppearanceMulish.LabelSmallNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:drawableStart="@drawable/ic_star"
+                    android:drawablePadding="4dp"
+                    android:textColor="@color/secondary"
+                    app:layout_constraintStart_toStartOf="@id/tv_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title"
+                    tools:text="9.5/10 IMDb" />
+
+                <HorizontalScrollView
+                    android:id="@+id/hsv_genres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/tv_rating">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cg_genres"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:isScrollContainer="true"
+                        android:paddingHorizontal="16dp"
+                        app:chipSpacing="8dp"
+                        app:itemSpacing="8dp"
+                        app:singleLine="true" />
+
+                </HorizontalScrollView>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title_description"
+                    style="@style/TextAppearanceMerriweather.TitleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/description"
+                    android:textColor="@color/primary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/hsv_genres" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_description"
+                    style="@style/TextAppearanceMulish.BodySmallNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/secondary"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_description"
+                    tools:ellipsize="end"
+                    tools:maxLines="4"
+                    tools:text="@tools:sample/lorem/random" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title_cast"
+                    style="@style/TextAppearanceMerriweather.TitleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/cast"
+                    android:textColor="@color/primary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_casts"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_cast"
+                    tools:listitem="@layout/item_cast" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

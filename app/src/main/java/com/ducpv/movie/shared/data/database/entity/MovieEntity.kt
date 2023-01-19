@@ -7,15 +7,14 @@ import com.ducpv.movie.domain.model.Movie
 /**
  * Created by ducpv on 12/12/2022.
  */
-@Entity(
-    tableName = "movies",
-)
+@Entity(tableName = "movies")
 data class MovieEntity(
     @PrimaryKey
     val id: String,
     val title: String,
     val overview: String,
     val posterPath: String,
+    val backdropPath: String,
     val voteAverage: Double,
     val voteCount: Long,
 )
@@ -25,6 +24,7 @@ fun Movie.asEntity() = MovieEntity(
     title = title,
     overview = overview,
     posterPath = posterPath,
+    backdropPath = backdropPath,
     voteAverage = voteAverage,
     voteCount = voteCount,
 )
@@ -34,6 +34,7 @@ fun MovieEntity.asExternalModel() = Movie(
     title = title,
     overview = overview,
     posterPath = posterPath,
+    backdropPath = backdropPath,
     voteAverage = voteAverage,
     voteCount = voteCount,
 )

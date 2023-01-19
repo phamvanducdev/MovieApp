@@ -11,22 +11,20 @@
         tools:layout="@layout/fragment_main">
 
         <action
-            android:id="@+id/action_mainFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_mainFragment_to_detailActivity"
+            app:destination="@id/detailActivity" />
 
     </fragment>
 
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.ducpv.movie.ui.detail.DetailFragment"
-        tools:layout="@layout/fragment_detail">
+    <activity
+        android:id="@+id/detailActivity"
+        android:name="com.ducpv.movie.ui.detail.DetailActivity"
+        android:label="DetailActivity"
+        tools:layout="@layout/activity_detail">
 
         <argument
             android:name="movieId"
             app:argType="string" />
-
-        <deepLink app:uri="movie://detail/{movieId}" />
-
-    </fragment>
+    </activity>
 
 </navigation>

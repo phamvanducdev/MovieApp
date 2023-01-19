@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .home-container {
+            width: 100%;
+            height: 14;
+            display: flex;
+            overflow: auto;
+            font-size: 12;
+            min-height: 100vh;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .home-link {
+            display: contents;
+        }
+
+        .home-image {
+            width: 375px;
+            height: 724px;
+            object-fit: cover;
+            text-decoration: none;
+        }
+
+        .button-container {
+            flex: 0 0 auto;
+            width: 375px;
+            height: 166px;
+            display: flex;
+            position: relative;
+            align-items: flex-start;
+            justify-content: center;
+            background-color: #F4F4F4;
+        }
+
+        .container-title {
+            text-align: center;
+        }
+
+        .title {
+            top: 18px;
+            left: 34px;
+            right: 34px;
+            position: absolute;
+            font-size: 12px;
+            width: 307px;
+            height: 14px;
+        }
+
+        .home-button-voucher {
+            top: 48px;
+            flex: 0 0 auto;
+            left: 68px;
+            right: 67px;
+            width: 240px;
+            bottom: 48px;
+            height: 76px;
+            display: flex;
+            position: absolute;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+            background-color: #1A1A1A;
+            border-radius: 15px;
+        }
+
+        .home-button {
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 193px;
+            bottom: 0px;
+            height: 76px;
+            position: absolute;
+            padding-top: 0px;
+            border-style: hidden;
+            padding-left: 0px;
+            padding-bottom: 0px;
+            background-color: #1A1A1A;
+            border-radius: 5px;
+        }
+
+        .voucher-name {
+            top: 16px;
+            left: 16px;
+            color: #FFFFFF;
+            width: 159px;
+            height: 29px;
+            position: absolute;
+            font-size: 24px;
+            text-align: left;
+        }
+
+        .voucher-code {
+            top: 45px;
+            left: 16px;
+            color: #FFFFFF;
+            width: 159px;
+            bottom: 16px;
+            height: 14px;
+            padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+            position: absolute;
+            text-align: left;
+        }
+
+        .save-voucher {
+            top: 0px;
+            right: 0px;
+            width: 47px;
+            bottom: 0px;
+            height: 76px;
+            position: absolute;
+            padding-top: 0px;
+            padding-left: 0px;
+            padding-right: 0px;
+            padding-bottom: 0px;
+            background-color: #1A1A1A;
+            border-style: hidden;
+            border-radius: 5px;
+        }
+
+        .line {
+            width: 0px;
+            height: 45px;
+            border-width: 1px;
+            color: #FFFFFF;
+            position: absolute;
+            border-style: dashed;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="home-container">
+            <a class="home-link">
+                <img alt="image"
+                    src="https://dcvsju577z9ue.cloudfront.net/media/05-01-23/1672906778595_image_432088.png"
+                    class="home-image" />
+            </a>
+            <div class="button-container">
+                <div class="container-title">
+                    <span class="title">
+                        Chương trình áp dụng từ 1.1.2023 - 31.1.2023
+                    </span>
+                </div>
+                <div class="home-button-voucher">
+                    <a href="bidu://voucher-detail">
+                        <button class="home-button button">
+                            <span class="voucher-name">
+                                <span>FREESHIP</span>
+                                <br />
+                            </span>
+                            <span class="voucher-code">
+                                <span>0SHIP01</span>
+                                <br />
+                            </span>
+                        </button>
+                    </a>
+                    <a href="bidu://save-voucher">
+                        <button class="save-voucher button">
+                            <img alt="image"
+                                src="https://d2sjmgdw2mf86p.cloudfront.net/media/05-01-23/1672946098118_image_98339.png" />
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

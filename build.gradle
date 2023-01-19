@@ -15,11 +15,12 @@ buildscript {
     hilt = '1.0.0'
     hilt_android = '2.44'
     hilt_navigation = '1.0.0'
-    constraintlayout = '2.1.4'
     savedstate_ktx = '1.2.0'
     datastore_preferences = '1.0.0'
+    constraintlayout = '2.1.4'
     recyclerview = '1.2.1'
     swipe_refresh = '1.1.0'
+    coordinatorlayout = '1.2.0'
     camerax = '1.2.0-beta02'
     room = '2.5.0-beta02'
 

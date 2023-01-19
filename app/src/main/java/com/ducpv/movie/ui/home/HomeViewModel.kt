@@ -112,5 +112,5 @@ sealed interface HomeUiState {
             return items
         }
 
-    val emptyView: Boolean get() = uiItems.isEmpty() || this is Error
+    val isEmpty: Boolean get() = uiItems.isEmpty() || this is Error
 }

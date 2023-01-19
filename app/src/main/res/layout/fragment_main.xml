@@ -21,7 +21,7 @@
             app:navigationIconTint="@color/primary"
             app:title="@string/app_name"
             app:titleCentered="true"
-            app:titleTextAppearance="@style/TextAppearance.TitleSmall"
+            app:titleTextAppearance="@style/TextAppearanceMerriweather.TitleSmall"
             app:titleTextColor="@color/primary" />
 
         <androidx.fragment.app.FragmentContainerView

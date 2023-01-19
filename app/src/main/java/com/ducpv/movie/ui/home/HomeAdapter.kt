@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ducpv.movie.databinding.ItemHomeHeaderPopularBinding
 import com.ducpv.movie.databinding.ItemHomeLoadingBinding
 import com.ducpv.movie.databinding.ItemHomeMoviesShowingsBinding
-import com.ducpv.movie.databinding.ItemMoviePopularBinding
+import com.ducpv.movie.databinding.ItemMovieMatchParentBinding
 import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.service.MovieApi
 import com.ducpv.movie.shared.extension.dp
@@ -52,9 +52,8 @@ class HomeAdapter(
             }
             ItemHomeUiType.MOVIE_POPULAR.type -> {
                 ItemHomeMoviePopularVH(
-                    ItemMoviePopularBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                    onItemMovieClickListener,
-                    onBookmarkMovieClickListener
+                    ItemMovieMatchParentBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                    onItemMovieClickListener
                 )
             }
             else -> {
@@ -121,22 +120,14 @@ class HomeAdapter(
     }
 
     class ItemHomeMoviePopularVH(
-        private val binding: ItemMoviePopularBinding,
+        private val binding: ItemMovieMatchParentBinding,
         private val onItemMovieClickListener: (Movie) -> Unit,
-        private val onBookmarkMovieClickListener: (Movie) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.tvTitle.text = movie.title
-            binding.tvVoting.text = String.format("%s/10 IMDb", movie.voteAverage)
+            binding.tvRating.text = String.format("%s/10 IMDb", movie.voteAverage)
             binding.tvOverview.text = movie.overview
             binding.ivPoster.loadImage(MovieApi.getPosterPath(movie.posterPath))
-            binding.cbBookmark.isChecked = movie.isBookmarked
-            binding.cbBookmark.setOnCheckedChangeListener { compoundButton, checked ->
-                if (compoundButton.isPressed) {
-                    movie.isBookmarked = checked
-                    onBookmarkMovieClickListener.invoke(movie)
-                }
-            }
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)
             }

@@ -13,10 +13,6 @@
         app:fontStyle="normal"
         app:fontWeight="400" />
     <font
-        app:font="@font/merriweather_italic"
-        app:fontStyle="italic"
-        app:fontWeight="400" />
-    <font
         app:font="@font/merriweather_light"
         app:fontStyle="normal"
         app:fontWeight="300" />

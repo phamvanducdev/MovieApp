@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextAppearance.BottomMenu">
+    <style name="TextAppearanceMulish.BottomMenu">
         <item name="android:textSize">10sp</item>
     </style>
 
     <style name="BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
-        <item name="itemTextAppearanceActive">@style/TextAppearance.BottomMenu</item>
-        <item name="itemTextAppearanceInactive">@style/TextAppearance.BottomMenu</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearanceMulish.BottomMenu</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearanceMulish.BottomMenu</item>
         <item name="itemTextColor">@color/navigation_item_color</item>
     </style>
 

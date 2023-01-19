@@ -3,8 +3,10 @@ package com.ducpv.movie.ui.bookmark
 import androidx.fragment.app.viewModels
 import com.ducpv.movie.databinding.FragmentBookmarkBinding
 import com.ducpv.movie.shared.base.BaseFragment
+import com.ducpv.movie.shared.extension.dp
 import com.ducpv.movie.shared.extension.setVisible
 import com.ducpv.movie.shared.extension.singleObserve
+import com.ducpv.movie.shared.widget.GridSpaceDecoration
 import com.ducpv.movie.ui.main.MainFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +21,7 @@ class BookmarkFragment : BaseFragment<BookmarkViewModel, FragmentBookmarkBinding
         }
     }
 
-    private val bookmarkAdapter: BookmarkAdapter by lazy {
+    private val adapter: BookmarkAdapter by lazy {
         BookmarkAdapter {
             viewModel.onClickMovieDetail(it)
         }
@@ -31,19 +33,26 @@ class BookmarkFragment : BaseFragment<BookmarkViewModel, FragmentBookmarkBinding
         return FragmentBookmarkBinding.inflate(layoutInflater)
     }
 
-    override fun viewBinding() {
-        super.viewBinding()
-        binding.rvBookmark.adapter = bookmarkAdapter
+    override fun initialize() {
+        super.initialize()
+        binding.rvBookmark.adapter = adapter
+        binding.rvBookmark.addItemDecoration(
+            GridSpaceDecoration(
+                spanCount = 2,
+                spacingHorizontal = 8.dp,
+                spacingVertical = 8.dp,
+            )
+        )
     }
 
     override fun observeViewModel() {
         super.observeViewModel()
         singleObserve(viewModel.uiState) {
-            bookmarkAdapter.submitList(it)
+            adapter.submitList(it)
             binding.tvEmpty.setVisible(it.isEmpty())
         }
         singleObserve(viewModel.navigationMovieDetail) {
-            navigateTo(MainFragmentDirections.actionMainFragmentToDetailFragment(it))
+            navigateTo(MainFragmentDirections.actionMainFragmentToDetailActivity(it))
         }
     }
 }

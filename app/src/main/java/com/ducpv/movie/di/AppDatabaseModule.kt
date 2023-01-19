@@ -2,6 +2,7 @@ package com.ducpv.movie.di
 
 import android.content.Context
 import com.ducpv.movie.shared.data.database.AppDatabase
+import com.ducpv.movie.shared.data.database.dao.GenreDao
 import com.ducpv.movie.shared.data.database.dao.MovieDao
 import dagger.Module
 import dagger.Provides
@@ -22,4 +23,7 @@ object AppDatabaseModule {
 
     @Provides
     fun providesMovieDao(database: AppDatabase): MovieDao = database.movieDao()
+
+    @Provides
+    fun providesGenreDao(database: AppDatabase): GenreDao = database.genreDao()
 }

@@ -22,7 +22,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     private val adapter: HomeAdapter by lazy {
         HomeAdapter(
             onItemMovieClickListener = {
-                navigateTo(MainFragmentDirections.actionMainFragmentToDetailFragment(it.id))
+                navigateTo(MainFragmentDirections.actionMainFragmentToDetailActivity(it.id))
             },
             onBookmarkMovieClickListener = {
                 viewModel.onClickBookmarkMovie(it)
@@ -46,7 +46,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun observeViewModel() {
         singleObserve(viewModel.uiState) {
             adapter.submitList(it.uiItems)
-            binding.tvEmpty.setVisible(it.emptyView)
+            binding.tvEmpty.setVisible(it.isEmpty)
         }
     }
 }
