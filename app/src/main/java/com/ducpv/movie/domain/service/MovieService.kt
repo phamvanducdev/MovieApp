@@ -1,5 +1,6 @@
 package com.ducpv.movie.domain.service
 
+import com.ducpv.movie.domain.model.Credits
 import com.ducpv.movie.domain.model.Movie
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,4 +17,7 @@ interface MovieService {
 
     @GET("movie/{movieId}")
     suspend fun getMovieDetail(@Path("movieId") movieId: String): Movie
+
+    @GET("movie/{movieId}/credits")
+    suspend fun getMovieCredits(@Path("movieId") movieId: String): Credits
 }

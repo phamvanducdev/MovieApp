@@ -9,4 +9,8 @@
     <string name="notification">Notification</string>
     <string name="no_saved_bookmarks">No saved bookmarks</string>
     <string name="data_not_yet">Data not yet</string>
+    <string name="menu">Menu</string>
+    <string name="welcome_on_board">Welcome on board</string>
+    <string name="description">Description</string>
+    <string name="cast">Cast</string>
 </resources>

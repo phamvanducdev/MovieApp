@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.ducpv.movie.shared.data.database.dao.GenreDao
 import com.ducpv.movie.shared.data.database.dao.MovieDao
+import com.ducpv.movie.shared.data.database.entity.GenreEntity
 import com.ducpv.movie.shared.data.database.entity.MovieEntity
 
 /**
@@ -12,13 +15,18 @@ import com.ducpv.movie.shared.data.database.entity.MovieEntity
  */
 @Database(
     entities = [
-        MovieEntity::class
+        MovieEntity::class,
+        GenreEntity::class
     ],
     version = 1,
     exportSchema = false,
 )
+@TypeConverters(
+    AppConverters::class
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun movieDao(): MovieDao
+    abstract fun genreDao(): GenreDao
 
     companion object {
         private const val databaseName = "movie-db"

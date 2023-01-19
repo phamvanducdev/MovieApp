@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.ducpv.movie.databinding.ItemMoviePopularBinding
+import com.ducpv.movie.databinding.ItemMovieBinding
 import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.service.MovieApi
 import com.ducpv.movie.shared.extension.hide
@@ -29,7 +29,7 @@ class BookmarkAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemVH {
         return ItemVH(
-            ItemMoviePopularBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             onItemMovieClickListener
         )
     }
@@ -39,16 +39,14 @@ class BookmarkAdapter(
     }
 
     class ItemVH(
-        private val binding: ItemMoviePopularBinding,
+        private val binding: ItemMovieBinding,
         private val onItemMovieClickListener: (Movie) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             binding.tvTitle.text = movie.title
-            binding.tvVoting.text = String.format("%s/10 IMDb", movie.voteAverage)
-            binding.tvOverview.text = movie.overview
             binding.ivPoster.loadImage(MovieApi.getPosterPath(movie.posterPath))
+            binding.tvRating.text = String.format("%s/10 IMDb", movie.voteAverage)
             binding.cbBookmark.hide()
-
             binding.root.setOnClickListener {
                 onItemMovieClickListener.invoke(movie)
             }

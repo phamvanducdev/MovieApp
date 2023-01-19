@@ -17,7 +17,7 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_empty"
-            style="@style/TextAppearance.LabelLargeNormal"
+            style="@style/TextAppearanceMulish.LabelLargeNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/data_not_yet"

@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class SpaceDecoration @JvmOverloads constructor(
     private val spacingPx: Int,
-    private val enableStartSpacing: Boolean = false,
-    private val enableEndSpacing: Boolean = false
+    private val includeSpacingStart: Boolean = false,
+    private val includeSpacingEnd: Boolean = false
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
         outRect: Rect,
@@ -23,14 +23,14 @@ class SpaceDecoration @JvmOverloads constructor(
         if (spacingPx <= 0) {
             return
         }
-        if (enableStartSpacing && parent.getChildLayoutPosition(view) < 1 || parent.getChildLayoutPosition(view) >= 1) {
+        if (includeSpacingStart && parent.getChildLayoutPosition(view) < 1 || parent.getChildLayoutPosition(view) >= 1) {
             if (getOrientation(parent) == LinearLayoutManager.VERTICAL) {
                 outRect.top = spacingPx
             } else {
                 outRect.left = spacingPx
             }
         }
-        if (enableEndSpacing && parent.getChildAdapterPosition(view) == getTotalItemCount(parent) - 1) {
+        if (includeSpacingEnd && parent.getChildAdapterPosition(view) == getTotalItemCount(parent) - 1) {
             if (getOrientation(parent) == LinearLayoutManager.VERTICAL) {
                 outRect.bottom = spacingPx
             } else {
@@ -48,6 +48,38 @@ class SpaceDecoration @JvmOverloads constructor(
             (parent.layoutManager as? LinearLayoutManager)?.orientation
         } else {
             throw IllegalStateException("SpacingDecoration can only be used with a LinearLayoutManager.")
+        }
+    }
+}
+
+class GridSpaceDecoration(
+    private val spanCount: Int,
+    private val spacingVertical: Int,
+    private val spacingHorizontal: Int,
+    private val includeEdge: Boolean = false,
+) : RecyclerView.ItemDecoration() {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        val position = parent.getChildAdapterPosition(view)
+        val column = position % spanCount
+
+        if (includeEdge) {
+            outRect.left = spacingHorizontal - column * spacingHorizontal / spanCount
+            outRect.right = (column + 1) * spacingHorizontal / spanCount
+            if (position < spanCount) {
+                outRect.top = spacingVertical
+            }
+            outRect.bottom = spacingVertical
+        } else {
+            outRect.left = column * spacingHorizontal / spanCount
+            outRect.right = spacingHorizontal - (column + 1) * spacingHorizontal / spanCount
+            if (position >= spanCount) {
+                outRect.top = spacingVertical
+            }
         }
     }
 }

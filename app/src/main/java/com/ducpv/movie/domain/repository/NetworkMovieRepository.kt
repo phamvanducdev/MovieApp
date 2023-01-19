@@ -1,5 +1,6 @@
 package com.ducpv.movie.domain.repository
 
+import com.ducpv.movie.domain.model.Credits
 import com.ducpv.movie.domain.model.Movie
 import com.ducpv.movie.domain.service.MovieService
 import javax.inject.Inject
@@ -13,6 +14,7 @@ interface NetworkMovieRepository {
     fun getMoviesShowing(): Flow<List<Movie>>
     fun getMoviesPopular(): Flow<List<Movie>>
     fun getMovieDetail(movieId: String): Flow<Movie>
+    fun getMovieCredits(movieId: String): Flow<Credits>
 }
 
 class NetworkMovieRepositoryImpl @Inject constructor(
@@ -28,5 +30,9 @@ class NetworkMovieRepositoryImpl @Inject constructor(
 
     override fun getMovieDetail(movieId: String): Flow<Movie> = flow {
         emit(movieService.getMovieDetail(movieId))
+    }
+
+    override fun getMovieCredits(movieId: String): Flow<Credits> = flow {
+        emit(movieService.getMovieCredits(movieId))
     }
 }

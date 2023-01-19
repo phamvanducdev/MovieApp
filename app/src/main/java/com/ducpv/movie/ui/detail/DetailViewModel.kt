@@ -3,7 +3,9 @@ package com.ducpv.movie.ui.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.ducpv.movie.domain.usecase.BookmarkMovieUseCase
 import com.ducpv.movie.domain.usecase.GetMovieDetailUseCase
+import com.ducpv.movie.domain.usecase.UnBookmarkMovieUseCase
 import com.ducpv.movie.shared.base.BaseViewModel
 import com.ducpv.movie.shared.result.Result
 import com.ducpv.movie.shared.result.asResult
@@ -18,7 +20,9 @@ import kotlinx.coroutines.flow.stateIn
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    getMovieDetailUseCase: GetMovieDetailUseCase
+    getMovieDetailUseCase: GetMovieDetailUseCase,
+    private val bookmarkMovieUseCase: BookmarkMovieUseCase,
+    private val unBookmarkMovieUseCase: UnBookmarkMovieUseCase
 ) : BaseViewModel() {
     companion object {
         const val MOVIE_ID_SAVED_STATE_KEY = "movieId"
@@ -35,4 +39,15 @@ class DetailViewModel @Inject constructor(
             initialValue = Result.Loading
         )
         .asLiveData()
+
+    fun onClickBookmark(isBookmarked: Boolean) {
+        onLaunchCoroutine {
+            if (isBookmarked) {
+                val movie = (movieDetailState.value as Result.Success).data
+                bookmarkMovieUseCase(movie)
+            } else {
+                unBookmarkMovieUseCase(movieId)
+            }
+        }
+    }
 }

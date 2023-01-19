@@ -9,11 +9,12 @@
         android:background="@color/white"
         tools:context="com.ducpv.movie.ui.splash.SplashFragment">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/ic_launcher"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view"
+            style="@style/TextAppearanceMerriweather.BodyLargeNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome_on_board"
             android:tint="@color/secondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
