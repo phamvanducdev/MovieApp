@@ -1,4 +1,4 @@
-name: Run Deploy Debug App
+name: Workflows Deploy Debug App
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -38,6 +38,21 @@ jobs:
       - name: Run KtLint
         run: ./gradlew ktlint
 
+  qodana:
+    name: Run Qodana Code Inspection
+    needs: [ setup ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2022.3.0
+        with:
+          args: --print-problems,--log-level,debug
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+
   unittest:
     name: Run Unit Test
     needs: [ setup ]
@@ -55,7 +70,7 @@ jobs:
 
   build-and-deploy-debug-app:
     name: Build & Deploy Debug App
-    needs: [ setup, ktlint, unittest ]
+    needs: [ setup, ktlint, qodana, unittest ]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
