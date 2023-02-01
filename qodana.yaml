@@ -1,0 +1,12 @@
+version: "1.0"
+linter: jetbrains/qodana-jvm-community:2022.3
+failThreshold: 0
+profile:
+  name: qodana.recommended
+#include:
+#  - name: XmlHighlighting
+#  - name: ReplaceSizeZeroCheckWithIsEmpty
+#exclude:
+#  - name: All
+#    paths:
+#      - app/src/main/res
